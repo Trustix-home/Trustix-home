@@ -1,4 +1,4 @@
-# [Your Name]'s GitHub Profile
+# Jan's GitHub Profile
 
 ## About Me
 
