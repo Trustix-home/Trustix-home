@@ -2,7 +2,7 @@
 
 ## About Me
 
-I am passionate about Linux, Docker, CasaOS and ProxMox, and I love contributing to open-source projects.
+I am passionate about Linux, Docker and ProxMox, and I love contributing to open-source projects.
 
 ## Projects
 
