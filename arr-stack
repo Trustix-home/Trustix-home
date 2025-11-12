@@ -3,38 +3,38 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/London
+      - TZ=Europe/Oslo
     image: linuxserver/sonarr:latest
     ports:
       - 8989:8989/tcp
     restart: unless-stopped
     volumes:
-      - /srv/Downloads:/downloads
-      - /srv/TV Shows:/tvshows
+      - /srv/downloads:/downloads
+      - /srv/tvshows:/tvshows
       - /docker/sonarr:/config
   radarr:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/London
+      - TZ=Europe/Oslo
     image: linuxserver/radarr:latest
     ports:
       - 7878:7878/tcp
     restart: unless-stopped
     volumes:
       - /docker/radarr:/config
-      - /srv/Downloads:/downloads
-      - /srv/Movies:/movies
+      - /srv/downloads:/downloads
+      - /srv/movies:/movies
   lidarr:
     image: linuxserver/lidarr:latest
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/London
+      - TZ=Europe/Oslo
     volumes:
       - /docker/lidarr/config:/config
-      - /srv/Music:/music
-      - /srv/Downloads:/downloads
+      - /srv/music:/music
+      - /srv/downloads:/downloads
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -42,7 +42,7 @@ services:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/London
+      - TZ=Europe/Oslo
     image: linuxserver/deluge:latest
     ports:
       - 6881:6881/tcp
@@ -50,13 +50,13 @@ services:
       - 8112:8112/tcp
     restart: unless-stopped
     volumes:
-      - /srv/Downloads:/downloads
+      - /srv/downloads:/downloads
       - /docker/deluge:/config
   prowlarr:
     environment:
       - PUID=0
       - PGID=0
-      - TZ=Europe/London
+      - TZ=Europe/Oslo
     image: lscr.io/linuxserver/prowlarr:nightly
     ports:
       - 9696:9696/tcp
@@ -76,11 +76,11 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Etc/UTC
+      - TZ=Europe/Oslo
       - VERSION=docker
       - PLEX_CLAIM= #optional
     volumes:
-      - /path/to/plex/library:/config
-      - /path/to/tvseries:/tv
-      - /path/to/movies:/movies
+      - /srv/plex/library:/config
+      - /srv/tvshows:/tv
+      - /srv/movies:/movies
     restart: unless-stopped
