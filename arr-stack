@@ -1,0 +1,86 @@
+services:
+  sonarr:
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/London
+    image: linuxserver/sonarr:latest
+    ports:
+      - 8989:8989/tcp
+    restart: unless-stopped
+    volumes:
+      - /srv/Downloads:/downloads
+      - /srv/TV Shows:/tvshows
+      - /docker/sonarr:/config
+  radarr:
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/London
+    image: linuxserver/radarr:latest
+    ports:
+      - 7878:7878/tcp
+    restart: unless-stopped
+    volumes:
+      - /docker/radarr:/config
+      - /srv/Downloads:/downloads
+      - /srv/Movies:/movies
+  lidarr:
+    image: linuxserver/lidarr:latest
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/London
+    volumes:
+      - /docker/lidarr/config:/config
+      - /srv/Music:/music
+      - /srv/Downloads:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+  deluge:
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/London
+    image: linuxserver/deluge:latest
+    ports:
+      - 6881:6881/tcp
+      - 6881:6881/udp
+      - 8112:8112/tcp
+    restart: unless-stopped
+    volumes:
+      - /srv/Downloads:/downloads
+      - /docker/deluge:/config
+  prowlarr:
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/London
+    image: lscr.io/linuxserver/prowlarr:nightly
+    ports:
+      - 9696:9696/tcp
+    restart: unless-stopped
+    volumes:
+      - /srv/:/media
+      - /docker/prowlarr:/config
+  watchtower:
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - VERSION=docker
+      - PLEX_CLAIM= #optional
+    volumes:
+      - /path/to/plex/library:/config
+      - /path/to/tvseries:/tv
+      - /path/to/movies:/movies
+    restart: unless-stopped
