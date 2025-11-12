@@ -1,0 +1,22 @@
+docker run \
+  -d \
+  --name=plex \
+  -e PUID=1000 \
+  -e PGID=1000 \
+  -e TZ="Europe/Oslo" \
+  -e VERSION="docker" \
+  -p 32400:32400/tcp \
+  -p 3005:3005/tcp \
+  -p 8324:8324/tcp \
+  -p 32469:32469/tcp \
+  -p 32410:32410/udp \
+  -p 32412:32412/udp \
+  -p 32413:32413/udp \
+  -p 32414:32414/udp \
+  -v /srv/plex/config:/config \
+  -v /srv/plex/transcode:/transcode \
+  -v /srv/tvshows:/tv \
+  -v /srv/movies:/movies \
+  -v /srv/music:/music \
+  --restart unless-stopped \
+  linuxserver/plex
